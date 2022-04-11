@@ -64,6 +64,8 @@ df_health_con = df_filtered.groupby("health")["tree_dbh"].describe()
 
 ((df["status"]=="Stump").sum() + (df["status"]=="Dead").sum()) / (df["status"]=="Alive").sum()
 
+
+
 #apply function
 df_head["test_length"] = df_head["spc_common"].apply(len_calc)
 
@@ -71,3 +73,11 @@ def len_calc(x):
     return(len(str(x)))
 
 df2.loc[df2["tree_id"]==180683]
+
+#egyszeru szuresek
+df_mask = df[(df["spc_common"]!=df["spc_common"]) & (df["status"]=="Alive")]
+mask = ((df["spc_common"]!=df["spc_common"]) & (df["status"]=="Alive"))
+
+df.loc[mask, "spc_common"] = df.loc[mask, "spc_common"].fillna("undefined")
+df.loc[mask, "spc_common"] = "test"
+
