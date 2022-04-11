@@ -81,3 +81,6 @@ mask = ((df["spc_common"]!=df["spc_common"]) & (df["status"]=="Alive"))
 df.loc[mask, "spc_common"] = df.loc[mask, "spc_common"].fillna("undefined")
 df.loc[mask, "spc_common"] = "test"
 
+#dealing with loc
+new_date = df_complete["Completed Date"].apply(lambda x: pd.to_datetime(x))
+df_complete.loc["Completed Date"] = new_date
